@@ -7,9 +7,11 @@ import {
   Button,
   TouchableOpacity
 } from "react-native";
+import {withNavigation} from 'react-navigation'
+
 import { Context } from "../context/BlogContext";
 import { Feather } from "@expo/vector-icons";
-const IndexScreen = () => {
+const IndexScreen = ({navigation}) => {
   const { state, addBlogPosts, deleteBlogPost } = useContext(Context);
   return (
     <View>
@@ -17,10 +19,10 @@ const IndexScreen = () => {
       <Text>Index screen </Text>
       <FlatList
         data={state}
-        keyExtractor={state => state.title}
+        keyExtractor={state => `${state.id}`}
         renderItem={({ item }) => {
-          return (
-            <View style={styles.listItem}>
+          return <TouchableOpacity onPress={() => navigation.navigate('showPost', {id: item.id})}>
+            <View style={styles.listItem} >
               <Text style={styles.title}>{item.title}</Text>
               <TouchableOpacity  onPress={() => deleteBlogPost(item.id)}>
                 <Feather
@@ -30,7 +32,8 @@ const IndexScreen = () => {
                 />
               </TouchableOpacity>
             </View>
-          );
+            </TouchableOpacity>
+          ;
         }}
       />
     </View>
@@ -53,4 +56,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default IndexScreen;
+export default withNavigation(IndexScreen);
