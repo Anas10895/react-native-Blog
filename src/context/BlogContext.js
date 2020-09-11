@@ -1,12 +1,9 @@
-import React,{useReducer} from 'react';
-import { Switch } from 'react-native-gesture-handler';
-
-const BlogContext = React.createContext();
+import createContextData from './createContextData'
 
 const BlogReducer = (state, action) => {
 
     switch(action.type){
-        case 'addBlogPost' : 
+        case 'addBlogPosts2' : 
         return [...state, {title:`BlogPost #${state.length + 1}`}]
 
         
@@ -16,17 +13,16 @@ const BlogReducer = (state, action) => {
 
 }
  
-
-export const BlogProvider = ({children}) => {
-    const [BlogPosts, Dispatch] = useReducer(BlogReducer , [])
-
-    const addBlogPosts = () => {
-        Dispatch({type:'addBlogPost'})
+const addBlogPosts = dispatch => {
+    return () => {
+        dispatch({type:'addBlogPost'})
     }
-    return <BlogContext.Provider value={{data : BlogPosts, addBlogPosts}} >
-        {children}
-    </BlogContext.Provider>
+}
 
-};
+const addBlogPosts2 = dispatch => {
+    return () => {
+        dispatch({type:'addBlogPosts2'})
+    }
+}
 
-export default BlogContext
+export const {Context, Provider} = createContextData(BlogReducer, {addBlogPosts, addBlogPosts2}, []);
