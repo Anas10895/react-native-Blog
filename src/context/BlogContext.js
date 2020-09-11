@@ -1,28 +1,36 @@
-import createContextData from './createContextData'
+import createContextData from "./createContextData";
 
 const BlogReducer = (state, action) => {
+  switch (action.type) {
+    case "addBlogPost":
+      return [
+        ...state,
+        {
+          title: `BlogPost #${state.length + 1}`,
+          id: Math.floor(Math.random() * 9999)
+        }
+      ];
+      case 'deleteBlogPost':
+          return state.filter(blogPost => blogPost.id !== action.payload)
+    default:
+      return state;
+  }
+};
 
-    switch(action.type){
-        case 'addBlogPosts2' : 
-        return [...state, {title:`BlogPost #${state.length + 1}`}]
-
-        
-        default : 
-        return state;
-    }
-
-}
- 
 const addBlogPosts = dispatch => {
-    return () => {
-        dispatch({type:'addBlogPost'})
-    }
-}
+  return () => {
+    dispatch({ type: "addBlogPost" });
+  };
+};
 
-const addBlogPosts2 = dispatch => {
-    return () => {
-        dispatch({type:'addBlogPosts2'})
-    }
-}
+const deleteBlogPost = dispatch => {
+    return (id) => {
+      dispatch({ type: "deleteBlogPost", payload:id });
+    };
+  };
 
-export const {Context, Provider} = createContextData(BlogReducer, {addBlogPosts, addBlogPosts2}, []);
+export const { Context, Provider } = createContextData(
+  BlogReducer,
+  { addBlogPosts,deleteBlogPost },
+  []
+);
