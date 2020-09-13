@@ -15,7 +15,7 @@ const IndexScreen = ({navigation}) => {
   const { state, addBlogPosts, deleteBlogPost } = useContext(Context);
   return (
     <View>
-      <Button title="hello" onPress={addBlogPosts} />
+      {/* <Button title="hello" onPress={addBlogPosts} /> */}
       <Text>Index screen </Text>
       <FlatList
         data={state}
@@ -23,7 +23,11 @@ const IndexScreen = ({navigation}) => {
         renderItem={({ item }) => {
           return <TouchableOpacity onPress={() => navigation.navigate('showPost', {id: item.id})}>
             <View style={styles.listItem} >
+              <View style={styles.post}>
               <Text style={styles.title}>{item.title}</Text>
+              <Text style={styles.content}>{item.content}</Text>
+              </View>
+
               <TouchableOpacity  onPress={() => deleteBlogPost(item.id)}>
                 <Feather
                   style={styles.icon}
@@ -39,11 +43,11 @@ const IndexScreen = ({navigation}) => {
     </View>
   );
 };
-IndexScreen.navigationOptions = () => {
+IndexScreen.navigationOptions = ({navigation}) => {
   return {
     headerRight: () => (
-      <TouchableOpacity onPress={() => navigation.navigate('Create')}>
-        <Feather name="plus" size={30} />
+      <TouchableOpacity onPress={() => navigation.navigate('create')}>
+        <Feather  style={styles.icon} name="plus" size={30} />
       </TouchableOpacity>
     ),
   }; 
@@ -53,16 +57,26 @@ const styles = StyleSheet.create({
   listItem: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     margin: 5,
     borderWidth: 1,
-    padding: 3
+    padding: 3,
+    
+  },
+  post:{
+display:'flex',
+flexDirection:'column'
   },
   icon: {
-    fontSize: 24
-  },
+    fontSize: 24,
+    marginTop:"auto",
+    marginBottom:"auto"
+},
   title: {
     fontSize: 20
+  },
+  content: {
+    fontSize: 16
   }
 });
 
