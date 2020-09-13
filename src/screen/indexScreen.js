@@ -39,6 +39,16 @@ const IndexScreen = ({navigation}) => {
     </View>
   );
 };
+IndexScreen.navigationOptions = () => {
+  return {
+    headerRight: () => (
+      <TouchableOpacity onPress={() => navigation.navigate('Create')}>
+        <Feather name="plus" size={30} />
+      </TouchableOpacity>
+    ),
+  }; 
+}
+
 const styles = StyleSheet.create({
   listItem: {
     display: "flex",
@@ -57,3 +67,5 @@ const styles = StyleSheet.create({
 });
 
 export default withNavigation(IndexScreen);
+
+

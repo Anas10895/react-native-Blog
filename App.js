@@ -4,9 +4,11 @@ import { createStackNavigator } from 'react-navigation-stack';
 import IndexScreen from './src/screen/indexScreen';
 import { Provider } from './src/context/BlogContext';
 import ShowPost from './src/screen/ShowPost'
+import CreateScreen from './src/screen/CreatePost'
 const navigator = createStackNavigator({
   index: IndexScreen,
-  showPost :ShowPost
+  showPost :ShowPost,
+  create:CreateScreen
 
 },
 {
