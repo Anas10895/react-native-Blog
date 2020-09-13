@@ -18,8 +18,8 @@ const CreatePost = ({navigation}) => {
         <Button 
         title="add a Post"
         onPress={
-            () => {addBlogPosts(Title,Content)
-                     navigation.navigate("index")}
+            () => addBlogPosts(Title,Content , () => {navigation.navigate("index")})
+                     
             }  
               disabled={Title.length < 5  || Content.length < 5 ? true : false  } />
     </View>
