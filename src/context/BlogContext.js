@@ -13,8 +13,13 @@ const BlogReducer = (state, action) => {
       ];
       case 'deleteBlogPost':
           return state.filter(blogPost => blogPost.id !== action.payload)
+
+          case 'EditBlogPost':
+            return state.find(blogPost => blogPost.id )
     default:
       return state;
+
+      
   }
 };
 
@@ -34,5 +39,5 @@ const deleteBlogPost = dispatch => {
 export const { Context, Provider } = createContextData(
   BlogReducer,
   { addBlogPosts,deleteBlogPost },
-  []
+  [{title:"Test Post" , content:"this is the test content for the test Post", id:221}]
 );
