@@ -6,7 +6,6 @@ const ShowPost = ({navigation}) => {
     const {state} = useContext(Context);
 
     const BlogPost = state.find((BlogPost) => BlogPost.id === navigation.getParam('id'))
-    console.log(BlogPost.id)
     return <View>
         <Text style={styles.title}>Title: {BlogPost.title}</Text>
         <Text style={styles.content}> Content: {BlogPost.content}</Text>
@@ -16,7 +15,7 @@ const ShowPost = ({navigation}) => {
 ShowPost.navigationOptions = ({navigation}) => {
     return {
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate('edit', {id:BlogPost.id})}>
+        <TouchableOpacity onPress={() => navigation.navigate('edit', {id: navigation.getParam('id')})}>
           <Entypo  style={styles.icon} name="edit" size={30} />
         </TouchableOpacity>
       ),
