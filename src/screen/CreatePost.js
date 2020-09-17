@@ -7,7 +7,9 @@ const CreatePost = ({navigation}) => {
     const { addBlogPosts} = useContext(Context);
 
 
-return <BlogFrom/>
+return <BlogFrom onSubmit={(title, content) => {
+    addBlogPosts(title, content, () => navigation.navigate('index'))
+    }}/>
      
     
 }

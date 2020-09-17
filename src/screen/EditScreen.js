@@ -4,9 +4,15 @@ import {Context} from '../context/BlogContext'
 import BlogFrom from '../component/BlogForm';
 
 const EditScreen = ({navigation}) => {
-    const {state} = useContext(Context)
-    const BlogPost = state.find((BlogPost) => BlogPost.id === navigation.getParam('id'))
+    const {state,editBlogPost} = useContext(Context)
+    const id = navigation.getParam('id')
+    const BlogPost = state.find((BlogPost) => BlogPost.id === id)
 
-    return <BlogFrom/>
+    return (
+    <BlogFrom initalValue={{title:BlogPost.title , content:BlogPost.content}} 
+    onSubmit={(title, content) =>
+    editBlogPost(id, title, content, () => navigation.navigate('index'))
+    }/>
+    )
 }
 export default EditScreen;
