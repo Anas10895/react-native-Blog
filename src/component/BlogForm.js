@@ -9,7 +9,7 @@ const BlogFrom = ({  navigation, onSubmit, initalValue}) => {
    
     return <View>
     <Text style={style.lable}> Title</Text>
-    <TextInput style={style.input} value={Title} onChangeText={(text) => SetTitle(text)}/>
+    <TextInput style={style.input} value={Title}  onChangeText={(text) => SetTitle(text)}/>
     <Text style={style.lable}> Content</Text>
     <TextInput style={style.input} value={Content} onChangeText={(text) => SetContent(text)}/>
 
