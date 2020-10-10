@@ -7,7 +7,7 @@ const EditScreen = ({navigation}) => {
     const {state,editBlogPost} = useContext(Context)
     const id = navigation.getParam('id')
     const BlogPost = state.find((BlogPost) => BlogPost.id === id)
-
+    
     return (
     <BlogFrom initalValue={{title:BlogPost.title , content:BlogPost.content}} 
     onSubmit={(title, content) =>
