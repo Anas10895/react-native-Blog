@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,7 +12,12 @@ import {withNavigation} from 'react-navigation'
 import { Context } from "../context/BlogContext";
 import { Feather } from "@expo/vector-icons";
 const IndexScreen = ({navigation}) => {
-  const { state, addBlogPosts, deleteBlogPost } = useContext(Context);
+  const { state, addBlogPosts, deleteBlogPost, getBlogPosts } = useContext(Context);
+
+  useEffect(() => {
+    getBlogPosts();
+  }, [])
+  
   return (
     <View>
       {/* <Button title="hello" onPress={addBlogPosts} /> */}
